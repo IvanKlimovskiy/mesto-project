@@ -1,0 +1,21 @@
+.profile {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 40px 19px 0;
+  max-width: calc(880px + 19px + 19px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 711px) {
+  .profile {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 425px) {
+  .profile {
+    padding: 42px 19px 0;
+  }
+}

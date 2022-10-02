@@ -1,0 +1,10 @@
+.element__title {
+  max-width: 190px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 24px;
+  font-weight: 900;
+  margin: 0;
+  color: black;
+}
