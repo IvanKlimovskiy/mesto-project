@@ -24,10 +24,10 @@
               <h1 class="profile__title">Жак-Ив Кусто</h1>
               <p class="profile__subtitle">Исследователь океана</p>
             </div>
-            <button aria-label="Редактировать" type="submit" class="profile__edit-button"></button>
+            <button aria-label="Редактировать" type="button" class="profile__edit-button"></button>
           </div>
         </div>
-        <button aria-label="Добавить" type="submit" class="profile__add-button">
+        <button aria-label="Добавить" type="button" class="profile__add-button">
         </button>
       </section>
       <section class="elements">
@@ -35,42 +35,42 @@
           <img src="./images/ararat.jpg" alt="Гора Арарат" class="element__image">
           <div class="element__description">
             <h2 class="element__title">Гора Арарат</h2>
-            <button class="element__like"></button>
+            <button type="button" class="element__like"></button>
           </div>
         </article>
         <article class="element">
           <img src="./images/elbrus_mountain.jpg" alt="Гора Эльбрус" class="element__image">
           <div class="element__description">
             <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__like"></button>
+            <button type="button" class="element__like"></button>
           </div>
         </article>
         <article class="element">
           <img src="./images/dombai.jpg" alt="Домбай" class="element__image">
           <div class="element__description">
             <h2 class="element__title">Домбай</h2>
-            <button class="element__like"></button>
+            <button type="button" class="element__like"></button>
           </div>
         </article>
         <article class="element">
           <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкесия" class="element__image">
           <div class="element__description">
             <h2 class="element__title">Карачаево-Черкесия</h2>
-            <button class="element__like"></button>
+            <button type="button" class="element__like"></button>
           </div>
         </article>
         <article class="element">
           <img src="./images/sochi.jpg" alt="Сочи" class="element__image">
           <div class="element__description">
             <h2 class="element__title">Сочи</h2>
-            <button class="element__like"></button>
+            <button type="button" class="element__like"></button>
           </div>
         </article>
         <article class="element">
           <img src="./images/baykal-view.jpg" alt="Байкал" class="element__image">
           <div class="element__description">
             <h2 class="element__title">Байкал</h2>
-            <button class="element__like"></button>
+            <button type="button" class="element__like"></button>
           </div>
         </article>
       </section>
@@ -80,17 +80,16 @@
     </footer>
     <div class="popup popup_opened">
       <div class="edit-form-container">
-        <button aria-label="Закрыть" class="edit-form__close-button"></button>
+        <button type="button" aria-label="Закрыть" class="edit-form__close-button"></button>
         <form class="edit-form" method="post" name="edit-form">
           <h2 class="edit-form__title">Редактировать профиль</h2>
           <fieldset class="edit-form__profile-info">
             <label class="edit-form__label" for="name"></label>
-            <input name="name" value="" class="edit-form__input-text edit-form__input-text_name" type="text" id="name">
+            <input name="name" value="" class="edit-form__input-text" type="text" id="name">
             <label class="edit-form__label" for="profession"></label>
-            <input name="profession" value="" class="edit-form__input-text edit-form__input-text_profession"
-              type="text" id="profession">
+            <input name="profession" value="" class="edit-form__input-text" type="text" id="profession">
           </fieldset>
-            <button class="edit-form__button" type="submit">Сохранить</button>
+          <button class="edit-form__button" type="submit">Сохранить</button>
         </form>
       </div>
 
