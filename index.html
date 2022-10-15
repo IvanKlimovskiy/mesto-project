@@ -78,7 +78,7 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <div class="popup popup_opened">
+    <div class="popup">
       <div class="edit-form-container">
         <button type="button" aria-label="Закрыть" class="edit-form__close-button"></button>
         <form class="edit-form" method="post" name="edit-form">
@@ -92,9 +92,24 @@
           <button class="edit-form__button" type="submit">Сохранить</button>
         </form>
       </div>
-
+    </div>
+    <div class="popup">
+      <div class="edit-form-container">
+        <button type="button" aria-label="Закрыть" class="edit-form__close-button"></button>
+        <form class="edit-form" method="post" name="edit-form">
+          <h2 class="edit-form__title">Новое место</h2>
+          <fieldset class="edit-form__profile-info">
+            <label class="edit-form__label" for="name"></label>
+            <input name="name" value="" class="edit-form__input-text" type="text" id="name" placeholder="Название">
+            <label class="edit-form__label" for="place"></label>
+            <input name="profession" value="" class="edit-form__input-text" type="text" id="place" placeholder="Ссылка на картинку">
+          </fieldset>
+          <button class="edit-form__button" type="submit">Сохранить</button>
+        </form>
+      </div>
     </div>
   </div>
+  <script src="./script.js"></script>
 </body>
 
 </html>
