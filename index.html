@@ -31,48 +31,16 @@
         </button>
       </section>
       <section class="elements">
-        <article class="element">
-          <img src="./images/ararat.jpg" alt="Гора Арарат" class="element__image">
-          <div class="element__description">
-            <h2 class="element__title">Гора Арарат</h2>
-            <button type="button" class="element__like"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img src="./images/elbrus_mountain.jpg" alt="Гора Эльбрус" class="element__image">
-          <div class="element__description">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button type="button" class="element__like"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img src="./images/dombai.jpg" alt="Домбай" class="element__image">
-          <div class="element__description">
-            <h2 class="element__title">Домбай</h2>
-            <button type="button" class="element__like"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img src="./images/karachaevsk.jpg" alt="Карачаево-Черкесия" class="element__image">
-          <div class="element__description">
-            <h2 class="element__title">Карачаево-Черкесия</h2>
-            <button type="button" class="element__like"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img src="./images/sochi.jpg" alt="Сочи" class="element__image">
-          <div class="element__description">
-            <h2 class="element__title">Сочи</h2>
-            <button type="button" class="element__like"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img src="./images/baykal-view.jpg" alt="Байкал" class="element__image">
-          <div class="element__description">
-            <h2 class="element__title">Байкал</h2>
-            <button type="button" class="element__like"></button>
-          </div>
-        </article>
+        <template class="template">
+          <article class="element">
+            <img src="" alt="" class="element__image">
+            <button aria-label="Удалить" type="button" class="element__trash"></button>
+            <div class="element__description">
+              <h2 class="element__title"></h2>
+              <button aria-label="Мне нравится" type="button" class="element__like"></button>
+            </div>
+          </article>
+        </template>
       </section>
     </main>
     <footer class="footer">
@@ -102,11 +70,15 @@
             <label class="edit-form__label" for="name"></label>
             <input name="name" value="" class="edit-form__input-text" type="text" id="name" placeholder="Название">
             <label class="edit-form__label" for="place"></label>
-            <input name="profession" value="" class="edit-form__input-text" type="text" id="place" placeholder="Ссылка на картинку">
+            <input name="profession" value="" class="edit-form__input-text" type="text" id="place"
+              placeholder="Ссылка на картинку">
           </fieldset>
           <button class="edit-form__button" type="submit">Сохранить</button>
         </form>
       </div>
+    </div>
+    <div class="popup">
+      
     </div>
   </div>
   <script src="./script.js"></script>
