@@ -38,33 +38,6 @@ function formSubmitHandler(evt) {
 
 formElement[0].addEventListener("submit", formSubmitHandler);
 
-const initialCards = [
-  {
-    name: "Сочи",
-    link: "./images/sochi.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "./images/baykal-view.jpg",
-  },
-  {
-    name: "Карачаево-Черкесия",
-    link: "./images/karachaevsk.jpg",
-  },
-  {
-    name: "Домбай",
-    link: "./images/dombai.jpg",
-  },
-  {
-    name: "Гора Эльбрус",
-    link: "./images/elbrus_mountain.jpg",
-  },
-  {
-    name: "Гора Арарат",
-    link: "./images/ararat.jpg",
-  },
-];
-
 const elementTemplate = document.querySelector(".template").content;
 const elementsBlock = document.querySelector(".elements");
 
@@ -81,15 +54,15 @@ function renderElements() {
     buttonTrash.addEventListener("click", function (evt) {
       evt.target.closest(".element").remove();
     });
-    const elementImage = articleElement.querySelector('.element__image');
-    elementImage.addEventListener('click', function (evt) {
-      const popupImage = document.querySelector('.popup__image');
-      const popupTitle = document.querySelector('.popup__title');
+    const elementImage = articleElement.querySelector(".element__image");
+    elementImage.addEventListener("click", function (evt) {
+      const popupImage = document.querySelector(".popup__image");
+      const popupTitle = document.querySelector(".popup__title");
       popupImage.src = evt.target.src;
       popupTitle.textContent = evt.target.alt;
       popupImage.alt = evt.target.alt;
       popup[2].classList.add("popup_opened");
-    })
+    });
     articleElement.querySelector(".element__title").textContent = item.name;
     articleElement.querySelector(".element__image").alt = item.name;
     articleElement.querySelector(".element__image").src = item.link;
@@ -114,15 +87,15 @@ function formAddElement(evt) {
   buttonTrash.addEventListener("click", function (evt) {
     evt.target.closest(".element").remove();
   });
-  const elementImage = articleElement.querySelector('.element__image');
-  elementImage.addEventListener('click', function (evt) {
-    const popupImage = document.querySelector('.popup__image');
-    const popupTitle = document.querySelector('.popup__title');
+  const elementImage = articleElement.querySelector(".element__image");
+  elementImage.addEventListener("click", function (evt) {
+    const popupImage = document.querySelector(".popup__image");
+    const popupTitle = document.querySelector(".popup__title");
     popupImage.src = evt.target.src;
     popupTitle.textContent = evt.target.alt;
     popupImage.alt = evt.target.alt;
     popup[2].classList.add("popup_opened");
-  })
+  });
   articleElement.querySelector(".element__title").textContent = input[2].value;
   articleElement.querySelector(".element__image").alt = input[2].value;
   articleElement.querySelector(".element__image").src = input[3].value;
@@ -134,10 +107,10 @@ function formAddElement(evt) {
 
 formElement[1].addEventListener("submit", formAddElement);
 
-const popupCloseButton = document.querySelector('.popup__close-button');
+const popupCloseButton = document.querySelector(".popup__close-button");
 
-popupCloseButton.addEventListener('click', function () {
+popupCloseButton.addEventListener("click", function () {
   closePopup(2);
-})
+});
 
 renderElements();
