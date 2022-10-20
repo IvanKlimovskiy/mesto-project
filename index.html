@@ -46,38 +46,38 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <div class="popup popup_edit-form">
       <div class="edit-form-container">
         <button type="button" aria-label="Закрыть" class="edit-form__close-button"></button>
         <form class="edit-form" method="post" name="edit-form">
           <h2 class="edit-form__title">Редактировать профиль</h2>
           <fieldset class="edit-form__profile-info">
             <label class="edit-form__label" for="name"></label>
-            <input name="name" value="" class="edit-form__input-text" type="text" id="name" placeholder="Имя">
-            <label class="edit-form__label" for="profession"></label>
-            <input name="profession" value="" class="edit-form__input-text" type="text" id="profession" placeholder="Вид деятельности">
+            <input name="name" value="" class="edit-form__input-text edit-form__input-text-name" type="text" id="name" placeholder="Имя">
+            <label class="edit-form__label" for="job"></label>
+            <input name="job" value="" class="edit-form__input-text edit-form__input-text-job" type="text" id="job" placeholder="Вид деятельности">
           </fieldset>
           <button class="edit-form__button" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
-    <div class="popup">
-      <div class="edit-form-container">
-        <button type="button" aria-label="Закрыть" class="edit-form__close-button"></button>
-        <form class="edit-form" method="post" name="edit-form">
-          <h2 class="edit-form__title">Новое место</h2>
-          <fieldset class="edit-form__profile-info">
-            <label class="edit-form__label" for="name"></label>
-            <input name="name" value="" class="edit-form__input-text" type="text" id="name" placeholder="Название">
-            <label class="edit-form__label" for="place"></label>
-            <input name="profession" value="" class="edit-form__input-text" type="text" id="place"
+    <div class="popup popup_add-card-form">
+      <div class="edit-form-container add-card-form-container">
+        <button type="button" aria-label="Закрыть" class="edit-form__close-button add-card-form__close-button"></button>
+        <form class="edit-form add-card-form" method="post" name="add-card-form">
+          <h2 class="edit-form__title add-card-form__title">Новое место</h2>
+          <fieldset class="edit-form__profile-info add-card-form__profile-info">
+            <label class="edit-form__label add-card-form__label" for="card-name"></label>
+            <input name="card-name" value="" class="edit-form__input-text add-card-form__input-text-card-name" type="text" id="card-name" placeholder="Название">
+            <label class="edit-form__label add-card-form__label" for="link"></label>
+            <input name="link" value="" class="edit-form__input-text add-card-form__input-text-link" type="text" id="link"
               placeholder="Ссылка на картинку">
           </fieldset>
-          <button class="edit-form__button" type="submit">Сохранить</button>
+          <button class="edit-form__button add-card-form__button" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
-    <div class="popup popup_opacity">
+    <div class="popup popup_image">
       <div class="popup__container">
         <button type="button" aria-label="Закрыть" class="popup__close-button"></button>
         <img class="popup__image" src="" alt="">
