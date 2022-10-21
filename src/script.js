@@ -37,6 +37,8 @@ function submitEditProfileForm(evt) {
 function submitAddCardForm(evt) {
   evt.preventDefault();
   addCard(createCard(inputTextAddCardName.value, inputTextAddCardLink.value));
+  inputTextAddCardName.value = ""; 
+  inputTextAddCardLink.value = ""; 
   closePopup(popupAddCardForm);
 }
 
