@@ -8,14 +8,15 @@
   width: 358px;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
+  
 }
 
 .edit-form__input-text:focus {
   outline: none;
 }
 
-.edit-form__input-text:last-child {
-  margin-top: 30px;
+.edit-form__input-text:last-of-type {
+  margin-top: 12px;
 }
 
 @media (max-width: 550px) {

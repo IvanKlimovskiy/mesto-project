@@ -5,20 +5,20 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
+  <link rel="shortcut icon" href="#">
   <title>Mesto</title>
 </head>
 
 <body class="root">
   <div class="page">
     <header class="header">
-      <img src="./images/logo.svg" alt="Логотип" class="header__logo">
+      <img src="<%=require('./images/logo.svg')%>" alt="Логотип" class="header__logo">
     </header>
 
     <main class="content">
       <section class="profile">
         <div class="profile__info">
-          <img src="./images/avatar.jpg" alt="Аватар" class="profile__avatar">
+          <img src="<%=require('./images/avatar.jpg')%>" alt="Аватар" class="profile__avatar">
           <div class="profile__info-container">
             <div class="profile__info-text">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -49,15 +49,19 @@
     <div class="popup popup_edit-form">
       <div class="edit-form-container">
         <button type="button" aria-label="Закрыть" class="edit-form__close-button"></button>
-        <form class="edit-form" method="post" name="edit-form">
+        <form class="edit-form" method="post" name="editForm" novalidate>
           <h2 class="edit-form__title">Редактировать профиль</h2>
           <fieldset class="edit-form__profile-info">
             <label class="edit-form__label" for="name"></label>
             <input name="name" value="" class="edit-form__input-text edit-form__input-text-name" type="text" id="name"
-              placeholder="Имя">
+              placeholder="Имя" required minlength="2" maxlength="40" pattern="^[A-Za-zА-Яа-яЁё\s\-]+$"
+              data-error-message="Вы пропустили это поле.">
+            <span class="name-error edit-form__input-error"></span>
             <label class="edit-form__label" for="job"></label>
             <input name="job" value="" class="edit-form__input-text edit-form__input-text-job" type="text" id="job"
-              placeholder="Вид деятельности">
+              placeholder="Вид деятельности" required minlength="2" maxlength="200" pattern="^[A-Za-zА-Яа-яЁё\s\-]+$"
+              data-error-message="Вы пропустили это поле.">
+            <span class="job-error edit-form__input-error"></span>
           </fieldset>
           <button class="edit-form__button" type="submit">Сохранить</button>
         </form>
@@ -66,15 +70,18 @@
     <div class="popup popup_add-card-form">
       <div class="edit-form-container add-card-form-container">
         <button type="button" aria-label="Закрыть" class="edit-form__close-button add-card-form__close-button"></button>
-        <form class="edit-form add-card-form" method="post" name="add-card-form">
+        <form class="edit-form add-card-form" method="post" name="addCardForm" novalidate>
           <h2 class="edit-form__title add-card-form__title">Новое место</h2>
           <fieldset class="edit-form__profile-info add-card-form__profile-info">
             <label class="edit-form__label add-card-form__label" for="card-name"></label>
             <input name="card-name" value="" class="edit-form__input-text add-card-form__input-text-card-name"
-              type="text" id="card-name" placeholder="Название">
+              type="text" id="card-name" placeholder="Название" required minlength="2" maxlength="30"
+              pattern="^[A-Za-zА-Яа-яЁё\s\-]+$" data-error-message="Вы пропустили это поле.">
+            <span class="card-name-error edit-form__input-error"></span>
             <label class="edit-form__label add-card-form__label" for="link"></label>
-            <input name="link" value="" class="edit-form__input-text add-card-form__input-text-link" type="text"
-              id="link" placeholder="Ссылка на картинку">
+            <input name="link" value="" class="edit-form__input-text add-card-form__input-text-link" type="url"
+              id="link" placeholder="Ссылка на картинку" required data-error-message="Введите адрес сайта.">
+            <span class="link-error edit-form__input-error"></span>
           </fieldset>
           <button class="edit-form__button add-card-form__button" type="submit">Сохранить</button>
         </form>
@@ -88,8 +95,6 @@
       </div>
     </div>
   </div>
-  <script src="src/constants.js"></script>
-  <script src="src/script.js"></script>
 </body>
 
 </html>
