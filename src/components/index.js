@@ -38,21 +38,21 @@ import {
 const formElements = Array.from(document.forms);
 
 const buttonState = (hasInvalidInputs, formElement) => {
-  const buttonElement = formElement.querySelector('.edit-form__button')
+  const buttonElement = formElement.querySelector(".edit-form__button");
   if (hasInvalidInputs) {
-    buttonElement.classList.add('edit-form__button_disabled');
+    buttonElement.classList.add("edit-form__button_disabled");
     buttonElement.disabled = true;
   } else {
-    buttonElement.classList.remove('edit-form__button_disabled');
+    buttonElement.classList.remove("edit-form__button_disabled");
     buttonElement.disabled = false;
   }
-}
+};
 
 const hasInvalidInputs = (inputList) => {
   return inputList.some((inputElement) => {
-    return !inputElement.validity.valid
-  })
-}
+    return !inputElement.validity.valid;
+  });
+};
 
 const showInputError = (formElement, formInput, errorMessage) => {
   formInput.classList.add("edit-form__input-text_type_error");
@@ -84,7 +84,7 @@ formElements.forEach((formElement) => {
   const inputElementsList = Array.from(
     formElement.querySelectorAll(".edit-form__input-text")
   );
-  buttonState(hasInvalidInputs(inputElementsList), formElement)
+  buttonState(hasInvalidInputs(inputElementsList), formElement);
   inputElementsList.forEach((inputElement) => {
     setEventListener(formElement, inputElement);
   });
