@@ -10,91 +10,94 @@
 </head>
 
 <body class="root">
-  <div class="page">
-    <header class="header">
-      <img src="<%=require('./images/logo.svg')%>" alt="Логотип" class="header__logo">
-    </header>
+<div class="page">
+  <header class="header">
+    <img src="<%=require('./images/logo.svg')%>" alt="Логотип" class="header__logo">
+  </header>
 
-    <main class="content">
-      <section class="profile">
-        <div class="profile__info">
-          <img src="<%=require('./images/avatar.jpg')%>" alt="Аватар" class="profile__avatar">
-          <div class="profile__info-container">
-            <div class="profile__info-text">
-              <h1 class="profile__title">Жак-Ив Кусто</h1>
-              <p class="profile__subtitle">Исследователь океана</p>
-            </div>
-            <button aria-label="Редактировать" type="button" class="profile__edit-button"></button>
+  <main class="content">
+    <section class="profile">
+      <div class="profile__info">
+        <img src="<%=require('./images/avatar.jpg')%>" alt="Аватар" class="profile__avatar">
+        <div class="profile__info-container">
+          <div class="profile__info-text">
+            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <p class="profile__subtitle">Исследователь океана</p>
           </div>
+          <button aria-label="Редактировать" type="button" class="profile__edit-button"></button>
         </div>
-        <button aria-label="Добавить" type="button" class="profile__add-button">
-        </button>
-      </section>
-      <section class="elements">
-        <template class="template">
-          <article class="element">
-            <img src="" alt="" class="element__image">
-            <button aria-label="Удалить" type="button" class="element__trash"></button>
-            <div class="element__description">
-              <h2 class="element__title"></h2>
-              <button aria-label="Мне нравится" type="button" class="element__like"></button>
-            </div>
-          </article>
-        </template>
-      </section>
-    </main>
-    <footer class="footer">
-      <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
-    </footer>
-    <div class="popup popup_edit-form">
-      <div class="edit-form-container">
-        <button type="button" aria-label="Закрыть" class="edit-form__close-button"></button>
-        <form class="edit-form" method="post" name="editForm" novalidate>
-          <h2 class="edit-form__title">Редактировать профиль</h2>
-          <fieldset class="edit-form__profile-info">
-            <label class="edit-form__label" for="name"></label>
-            <input name="name" value="" class="edit-form__input-text edit-form__input-text-name" type="text" id="name"
-              placeholder="Имя" required minlength="2" maxlength="40" pattern="^[A-Za-zА-Яа-яЁё\s\-]+$"
-              data-error-message="Вы пропустили это поле.">
-            <span class="name-error edit-form__input-error"></span>
-            <label class="edit-form__label" for="job"></label>
-            <input name="job" value="" class="edit-form__input-text edit-form__input-text-job" type="text" id="job"
-              placeholder="Вид деятельности" required minlength="2" maxlength="200" pattern="^[A-Za-zА-Яа-яЁё\s\-]+$"
-              data-error-message="Вы пропустили это поле.">
-            <span class="job-error edit-form__input-error"></span>
-          </fieldset>
-          <button class="edit-form__button" type="submit">Сохранить</button>
-        </form>
       </div>
-    </div>
-    <div class="popup popup_add-card-form">
-      <div class="edit-form-container add-card-form-container">
-        <button type="button" aria-label="Закрыть" class="edit-form__close-button add-card-form__close-button"></button>
-        <form class="edit-form add-card-form" method="post" name="addCardForm" novalidate>
-          <h2 class="edit-form__title add-card-form__title">Новое место</h2>
-          <fieldset class="edit-form__profile-info add-card-form__profile-info">
-            <label class="edit-form__label add-card-form__label" for="card-name"></label>
-            <input name="card-name" value="" class="edit-form__input-text add-card-form__input-text-card-name"
-              type="text" id="card-name" placeholder="Название" required minlength="2" maxlength="30"
-              pattern="^[A-Za-zА-Яа-яЁё\s\-]+$" data-error-message="Вы пропустили это поле.">
-            <span class="card-name-error edit-form__input-error"></span>
-            <label class="edit-form__label add-card-form__label" for="link"></label>
-            <input name="link" value="" class="edit-form__input-text add-card-form__input-text-link" type="url"
-              id="link" placeholder="Ссылка на картинку" required data-error-message="Введите адрес сайта.">
-            <span class="link-error edit-form__input-error"></span>
-          </fieldset>
-          <button class="edit-form__button add-card-form__button" type="submit">Сохранить</button>
-        </form>
-      </div>
-    </div>
-    <div class="popup popup_image">
-      <div class="popup__container">
-        <button type="button" aria-label="Закрыть" class="popup__close-button"></button>
-        <img class="popup__image" src="" alt="">
-        <h2 class="popup__title"></h2>
-      </div>
+      <button aria-label="Добавить" type="button" class="profile__add-button">
+      </button>
+    </section>
+    <section class="elements">
+      <template class="template">
+        <article class="element">
+          <img src="" alt="" class="element__image">
+          <button aria-label="Удалить" type="button" class="element__trash"></button>
+          <div class="element__description">
+            <h2 class="element__title"></h2>
+            <button aria-label="Мне нравится" type="button" class="element__like"></button>
+          </div>
+        </article>
+      </template>
+    </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+  </footer>
+  <div class="popup popup_edit-form">
+    <div class="edit-form-container">
+      <button type="button" aria-label="Закрыть" class="edit-form__close-button"></button>
+      <form class="edit-form" method="post" name="editForm" novalidate>
+        <h2 class="edit-form__title">Редактировать профиль</h2>
+        <fieldset class="edit-form__profile-info">
+          <label class="edit-form__label" for="name"></label>
+          <input name="name" value="" class="edit-form__input-text edit-form__input-text-name" type="text" id="name"
+                 placeholder="Имя" required minlength="2" maxlength="40" pattern="^[A-Za-zА-Яа-яЁё\s\-]+$"
+                 data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
+          <span class="name-error edit-form__input-error"></span>
+          <label class="edit-form__label" for="job"></label>
+          <input name="job" value="" class="edit-form__input-text edit-form__input-text-job" type="text" id="job"
+                 placeholder="Вид деятельности" required minlength="2" maxlength="200" pattern="^[A-Za-zА-Яа-яЁё\s\-]+$"
+                 data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
+          <span class="job-error edit-form__input-error"></span>
+        </fieldset>
+        <button class="edit-form__button" type="submit">Сохранить</button>
+      </form>
     </div>
   </div>
+  <div class="popup popup_add-card-form">
+    <div class="edit-form-container add-card-form-container">
+      <button type="button" aria-label="Закрыть" class="edit-form__close-button add-card-form__close-button"></button>
+      <form class="edit-form add-card-form" method="post" name="addCardForm" novalidate>
+        <h2 class="edit-form__title add-card-form__title">Новое место</h2>
+        <fieldset class="edit-form__profile-info add-card-form__profile-info">
+          <label class="edit-form__label add-card-form__label" for="card-name"></label>
+          <input name="card-name" value="" class="edit-form__input-text add-card-form__input-text-card-name"
+                 type="text" id="card-name" placeholder="Название" required minlength="2" maxlength="30"
+                 pattern="^[A-Za-zА-Яа-яЁё\s\-]+$"
+                 data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
+          <span class="card-name-error edit-form__input-error"></span>
+          <label class="edit-form__label add-card-form__label" for="link"></label>
+          <input name="link" value="" class="edit-form__input-text add-card-form__input-text-link"
+                 id="link" placeholder="Ссылка на картинку" required type="url">
+          <span class="link-error edit-form__input-error"></span>
+        </fieldset>
+        <button class="edit-form__button add-card-form__button edit-form__button_disabled" type="submit" disabled>
+          Сохранить
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup_image">
+    <div class="popup__container">
+      <button type="button" aria-label="Закрыть" class="popup__close-button"></button>
+      <img class="popup__image" src="" alt="">
+      <h2 class="popup__title"></h2>
+    </div>
+  </div>
+</div>
 </body>
 
 </html>

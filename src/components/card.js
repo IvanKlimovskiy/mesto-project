@@ -4,48 +4,32 @@ import karachaevskImage from "../images/karachaevsk.jpg";
 import dombaiImage from "../images/dombai.jpg";
 import elbrusMountainImage from "../images/elbrus_mountain.jpg";
 import araratImage from "../images/ararat.jpg";
-import { openPopup, popupImage } from "./modal";
+import {openPopup, popupImage} from "./modal";
 import {
-  inputTextAddCardName,
-  inputTextAddCardLink,
   profileTitle,
   profileSubtitle,
   inputTextEditFormName,
   inputTextEditFormJob,
 } from "./validate";
 import {
-  closePopup,
-  popupEditForm,
-  popupAddCardForm,
+  closePopup, popupEditForm,
 } from "./modal";
 
-const initialCards = [
-  {
-    name: "Сочи",
-    link: sochiImage,
-  },
-  {
-    name: "Байкал",
-    link: baykalImage,
-  },
-  {
-    name: "Карачаево-Черкесия",
-    link: karachaevskImage,
-  },
-  {
-    name: "Домбай",
-    link: dombaiImage,
-  },
-  {
-    name: "Гора Эльбрус",
-    link: elbrusMountainImage,
-  },
-  {
-    name: "Гора Арарат",
-    link: araratImage,
-  },
-];
+const initialCards = [{
+  name: "Сочи", link: sochiImage,
+}, {
+  name: "Байкал", link: baykalImage,
+}, {
+  name: "Карачаево-Черкесия", link: karachaevskImage,
+}, {
+  name: "Домбай", link: dombaiImage,
+}, {
+  name: "Гора Эльбрус", link: elbrusMountainImage,
+}, {
+  name: "Гора Арарат", link: araratImage,
+},];
 const elementTemplate = document.querySelector(".template").content;
+
 const elementsBlock = document.querySelector(".elements");
 
 function createCard(name, link) {
@@ -80,7 +64,7 @@ function addCard(card) {
   elementsBlock.prepend(card);
 }
 
-function renderinitialCards() {
+function renderInitialCards() {
   initialCards.forEach(function (item) {
     addCard(createCard(item.name, item.link));
   });
@@ -93,11 +77,5 @@ function submitEditProfileForm(evt) {
   closePopup(popupEditForm);
 }
 
-function submitAddCardForm(evt) {
-  evt.preventDefault();
-  addCard(createCard(inputTextAddCardName.value, inputTextAddCardLink.value));
-  inputTextAddCardName.value = "";
-  inputTextAddCardLink.value = "";
-  closePopup(popupAddCardForm);
-}
-export { submitEditProfileForm, submitAddCardForm, renderinitialCards };
+
+export {submitEditProfileForm, renderInitialCards, addCard, createCard};
