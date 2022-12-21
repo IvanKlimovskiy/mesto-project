@@ -1,7 +1,6 @@
 import {closePopup} from './utils'
 
-const buttonCloseEditForm = document.querySelector(".edit-form__close-button");
-const buttonCloseAddCardForm = document.querySelector(".add-card-form__close-button");
+const buttonsCloseForm = Array.from(document.querySelectorAll(".edit-form__close-button"));
 const buttonOpenEditForm = document.querySelector(".profile__edit-button");
 const buttonOpenAddCard = document.querySelector(".profile__add-button");
 const buttonClosePopupImage = document.querySelector(".popup__close-button");
@@ -33,7 +32,6 @@ export {
   buttonOpenEditForm,
   buttonOpenAddCard,
   buttonClosePopupImage,
-  buttonCloseEditForm,
-  buttonCloseAddCardForm,
+  buttonsCloseForm,
   closeByEscape
 };

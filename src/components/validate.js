@@ -1,4 +1,4 @@
-const buttonState = (hasInvalidInputs, formElement, config) => {
+const toggleButtonState = (hasInvalidInputs, formElement, config) => {
   const buttonElement = formElement.querySelector(config.submitButtonSelector);
   if (hasInvalidInputs) {
     buttonElement.classList.add(config.inactiveButtonClass);
@@ -45,7 +45,7 @@ const setEventListener = (formElement, inputElement, config) => {
   const inputElementsList = Array.from(formElement.querySelectorAll(config.inputElement));
   inputElement.addEventListener("input", () => {
     isValid(formElement, inputElement, inputElement.dataset.errorMessage, config);
-    buttonState(hasInvalidInputs(inputElementsList), formElement, config);
+    toggleButtonState(hasInvalidInputs(inputElementsList), formElement, config);
   });
 };
 
@@ -68,7 +68,7 @@ const hasInvalidField = (formElement, formInput, config) => {
 }
 
 export {
-  buttonState,
+  toggleButtonState,
   hasInvalidInputs,
   showInputError,
   hideInputError,
