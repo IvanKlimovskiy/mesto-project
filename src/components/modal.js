@@ -1,3 +1,5 @@
+import {closePopup} from './utils'
+
 const buttonCloseEditForm = document.querySelector(".edit-form__close-button");
 const buttonCloseAddCardForm = document.querySelector(".add-card-form__close-button");
 const buttonOpenEditForm = document.querySelector(".profile__edit-button");
@@ -9,12 +11,11 @@ const popupImage = document.querySelector(".popup_image");
 
 const popupList = Array.from(document.querySelectorAll(".popup"));
 
-function openPopup(popup) {
-  popup.classList.add("popup_opened");
-}
-
-function closePopup(popup) {
-  popup.classList.remove("popup_opened");
+const closeByEscape = (evt) => {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector('.popup_opened')
+    closePopup(openedPopup)
+  }
 }
 
 popupList.forEach((popup) => {
@@ -23,16 +24,9 @@ popupList.forEach((popup) => {
       closePopup(popup);
     }
   })
-  window.addEventListener("keydown", (evt) => {
-    if (evt.key === "Escape") {
-      closePopup(popup)
-    }
-  })
 })
 
 export {
-  openPopup,
-  closePopup,
   popupAddCardForm,
   popupImage,
   popupEditForm,
@@ -41,4 +35,5 @@ export {
   buttonClosePopupImage,
   buttonCloseEditForm,
   buttonCloseAddCardForm,
+  closeByEscape
 };

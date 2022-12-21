@@ -1,11 +1,14 @@
 import "../pages/index.css";
 import {
-  submitEditProfileForm, renderInitialCards,
+  addCard,
+  createCard,
+  renderInitialCards
 } from "./card";
-import {submitAddCardForm} from './utils'
 import {
   openPopup,
   closePopup,
+} from './utils'
+import {
   popupEditForm,
   popupAddCardForm,
   popupImage,
@@ -17,18 +20,22 @@ import {
 } from "./modal";
 
 import {
-  editProfileForm,
-  addCardForm,
-  profileTitle,
-  profileSubtitle,
-  inputTextEditFormName,
-  inputTextEditFormJob,
   enableValidation,
+  buttonState,
 } from "./validate";
 
-renderInitialCards();
+import {
+  profileTitle,
+  profileSubtitle,
+  editProfileForm,
+  inputTextEditFormName,
+  inputTextEditFormJob,
+  addCardForm,
+  inputTextAddCardName,
+  inputTextAddCardLink
+} from "./variables"
 
-export const config = {
+export const settings = {
   formElement: '.edit-form',
   inputElement: '.edit-form__input-text',
   submitButtonSelector: '.edit-form__button',
@@ -37,7 +44,24 @@ export const config = {
   errorClass: '.edit-form__input-error'
 }
 
-enableValidation();
+function submitEditProfileForm(evt) {
+  evt.preventDefault();
+  profileTitle.textContent = inputTextEditFormName.value;
+  profileSubtitle.textContent = inputTextEditFormJob.value;
+  closePopup(popupEditForm);
+}
+
+function submitAddCardForm(evt) {
+  evt.preventDefault();
+  addCard(createCard(inputTextAddCardName.value, inputTextAddCardLink.value));
+  evt.target.reset();
+  closePopup(popupAddCardForm);
+  buttonState(true, popupAddCardForm, settings)
+}
+
+renderInitialCards();
+
+enableValidation(settings);
 
 editProfileForm.addEventListener("submit", submitEditProfileForm);
 
@@ -52,9 +76,9 @@ buttonCloseAddCardForm.addEventListener("click", () => {
 });
 
 buttonOpenEditForm.addEventListener("click", () => {
-  openPopup(popupEditForm);
   inputTextEditFormName.value = profileTitle.textContent;
   inputTextEditFormJob.value = profileSubtitle.textContent;
+  openPopup(popupEditForm);
 });
 
 buttonOpenAddCard.addEventListener("click", () => {
