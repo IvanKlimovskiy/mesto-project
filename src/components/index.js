@@ -11,9 +11,7 @@ import {
 import {
   popupEditForm,
   popupAddCardForm,
-  popupImage,
-  buttonClosePopupImage,
-  buttonsCloseForm,
+  closeButtons,
   buttonOpenEditForm,
   buttonOpenAddCard,
 } from "./modal";
@@ -66,7 +64,7 @@ editProfileForm.addEventListener("submit", submitEditProfileForm);
 
 addCardForm.addEventListener("submit", submitAddCardForm);
 
-buttonsCloseForm.forEach((button) => {
+closeButtons.forEach((button) => {
   const popup = button.closest(".popup")
   button.addEventListener("click", () => {
     closePopup(popup)
@@ -89,8 +87,4 @@ buttonOpenEditForm.addEventListener("click", () => {
 
 buttonOpenAddCard.addEventListener("click", () => {
   openPopup(popupAddCardForm);
-});
-
-buttonClosePopupImage.addEventListener("click", () => {
-  closePopup(popupImage);
 });
