@@ -1,20 +1,15 @@
 import "../pages/index.css";
+
 import {
   addCard,
   createCard,
   renderInitialCards
 } from "./card";
+
 import {
   openPopup,
-  closePopup,
+  closePopup, toggleButtonSendingData,
 } from './utils'
-import {
-  popupEditForm,
-  popupAddCardForm,
-  closeButtons,
-  buttonOpenEditForm,
-  buttonOpenAddCard,
-} from "./modal";
 
 import {
   enableValidation, hasInvalidField, hasInvalidInputs,
@@ -25,12 +20,28 @@ import {
   profileTitle,
   profileSubtitle,
   editProfileForm,
+  profileAvatar,
   inputTextEditFormName,
   inputTextEditFormJob,
   addCardForm,
-  inputTextAddCardName,
-  inputTextAddCardLink
+  editAvatarForm,
+  inputTextEditAvatarLink,
+  popupEditForm,
+  popupAddCardForm,
+  popupEditAvatar,
+  closeButtons,
+  buttonOpenEditForm,
+  buttonOpenAddCard,
+  buttonOpenAvatarEditForm,
 } from "./variables"
+
+import {
+  getInitialCards,
+  getUserInformation,
+  postCardToServer,
+  updateAvatar,
+  updateUserInformation
+} from "./api";
 
 export const settings = {
   formElement: '.edit-form',
@@ -43,26 +54,80 @@ export const settings = {
 
 function submitEditProfileForm(evt) {
   evt.preventDefault();
+  toggleButtonSendingData(false)
   profileTitle.textContent = inputTextEditFormName.value;
   profileSubtitle.textContent = inputTextEditFormJob.value;
-  closePopup(popupEditForm);
+  updateUserInformation()
+    .then((userData) => {
+      profileTitle.textContent = userData.name;
+      profileSubtitle.textContent = userData.about;
+      closePopup(popupEditForm);
+      toggleButtonSendingData(true)
+    })
+    .catch((error) => {
+      console.log(error)
+      toggleButtonSendingData(true)
+    })
 }
 
 function submitAddCardForm(evt) {
   evt.preventDefault();
-  addCard(createCard(inputTextAddCardName.value, inputTextAddCardLink.value));
-  evt.target.reset();
-  closePopup(popupAddCardForm);
-  toggleButtonState(true, popupAddCardForm, settings)
+  toggleButtonSendingData(false)
+  postCardToServer()
+    .then((userData) => {
+      addCard(createCard(userData.name, userData.link, userData.owner._id, userData._id, userData.likes));
+      closePopup(popupAddCardForm);
+      evt.target.reset();
+      toggleButtonSendingData(true)
+      toggleButtonState(true, popupAddCardForm, settings)
+    })
+    .catch((error) => {
+      console.log(error)
+      toggleButtonSendingData(true)
+    })
 }
 
-renderInitialCards();
+function submitEditAvatarForm(evt) {
+  evt.preventDefault();
+  toggleButtonSendingData(false)
+  profileAvatar.src = inputTextEditAvatarLink.value
+  updateAvatar()
+    .then((userData) => {
+      profileAvatar.src = userData.avatar;
+      closePopup(popupEditAvatar);
+      toggleButtonState(true, editAvatarForm, settings)
+      evt.target.reset();
+      toggleButtonSendingData(true)
+    })
+    .catch((error) => {
+      console.log(error)
+      toggleButtonSendingData(true)
+    })
+}
+
+getUserInformation()
+  .then((userData) => {
+    profileTitle.textContent = userData.name;
+    profileSubtitle.textContent = userData.about;
+    profileAvatar.src = userData.avatar;
+  }).catch((error) => {
+  console.log(error)
+})
+
+getInitialCards()
+  .then((cards) => {
+    renderInitialCards(cards)
+  })
+  .catch((error) => {
+    console.log(error)
+  })
 
 enableValidation(settings);
 
 editProfileForm.addEventListener("submit", submitEditProfileForm);
-
+editAvatarForm.addEventListener("submit", submitEditAvatarForm);
 addCardForm.addEventListener("submit", submitAddCardForm);
+
 
 closeButtons.forEach((button) => {
   const popup = button.closest(".popup")
@@ -88,3 +153,8 @@ buttonOpenEditForm.addEventListener("click", () => {
 buttonOpenAddCard.addEventListener("click", () => {
   openPopup(popupAddCardForm);
 });
+
+buttonOpenAvatarEditForm.addEventListener("click", () => {
+  openPopup(popupEditAvatar)
+})
+

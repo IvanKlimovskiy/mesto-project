@@ -1,0 +1,13 @@
+.profile__edit-avatar-image {
+  cursor: pointer;
+  display: none;
+  background-image: url("../../../images/button-edit.svg");
+  background-color: rgba(0, 0, 0, 0);
+  background-repeat: no-repeat;
+  background-size: 26px;
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  top: 47px;
+  left: 47px;
+}

@@ -1,45 +1,64 @@
-import sochiImage from "../images/sochi.jpg";
-import baykalImage from "../images/baykal-view.jpg";
-import karachaevskImage from "../images/karachaevsk.jpg";
-import dombaiImage from "../images/dombai.jpg";
-import elbrusMountainImage from "../images/elbrus_mountain.jpg";
-import araratImage from "../images/ararat.jpg";
-import {popupImage} from "./modal";
+import {popupImage} from "./variables";
 import {openPopup} from "./utils";
+import {addLikeToServer, deleteCardFromServer, removeLikeFromServer} from "./api";
+import {
+  elementsBlock,
+  elementTemplate,
+  imageTitle,
+  myId,
+  popupOpenedImage,
+  profileTitle
+} from "./variables";
 
-const initialCards = [{
-  name: "Сочи", link: sochiImage,
-}, {
-  name: "Байкал", link: baykalImage,
-}, {
-  name: "Карачаево-Черкесия", link: karachaevskImage,
-}, {
-  name: "Домбай", link: dombaiImage,
-}, {
-  name: "Гора Эльбрус", link: elbrusMountainImage,
-}, {
-  name: "Гора Арарат", link: araratImage,
-},];
-const elementTemplate = document.querySelector(".template").content;
-const popupOpenedImage = document.querySelector(".popup__image");
-const imageTitle = document.querySelector(".popup__title");
-const elementsBlock = document.querySelector(".elements");
-
-function createCard(name, link) {
+function createCard(name, link, cardOwner, cardId, likesArray) {
   const articleElement = elementTemplate.querySelector(".element").cloneNode(true);
   const buttonLike = articleElement.querySelector(".element__like");
   const buttonTrash = articleElement.querySelector(".element__trash");
   const elementImage = articleElement.querySelector(".element__image");
+  const elementLikeNumber = articleElement.querySelector(".element__like-number");
 
   articleElement.querySelector(".element__title").textContent = name;
   elementImage.alt = name;
   elementImage.src = link;
+  if (likesArray.filter(like => like.name === profileTitle.textContent).length > 0) {
+    buttonLike.classList.add("element__like_active");
+  }
   buttonLike.addEventListener("click", function (evt) {
-    evt.target.classList.toggle("element__like_active");
+    if (!evt.target.classList.contains("element__like_active")) {
+      evt.target.classList.add("element__like_active");
+      addLikeToServer(cardId)
+        .then((userData) => {
+          elementLikeNumber.textContent = userData.likes.length
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    } else {
+      evt.target.classList.remove("element__like_active");
+      removeLikeFromServer(cardId)
+        .then((userData) => {
+          elementLikeNumber.textContent = userData.likes.length
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
   });
-  buttonTrash.addEventListener("click", function (evt) {
-    evt.target.closest(".element").remove();
-  });
+  elementLikeNumber.textContent = likesArray.length
+  if (cardOwner === myId) {
+    buttonTrash.addEventListener("click", function (evt) {
+      evt.preventDefault();
+      deleteCardFromServer(cardId)
+        .then(() => {
+          evt.target.closest(".element").remove();
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    });
+  } else {
+    buttonTrash.style.display = 'none'
+  }
   elementImage.addEventListener("click", function () {
     popupOpenedImage.src = link;
     imageTitle.textContent = name;
@@ -53,9 +72,9 @@ function addCard(card) {
   elementsBlock.prepend(card);
 }
 
-function renderInitialCards() {
-  initialCards.forEach(function (item) {
-    addCard(createCard(item.name, item.link));
+function renderInitialCards(cards) {
+  cards.forEach(function (card) {
+    addCard(createCard(card.name, card.link, card.owner._id, card._id, card.likes));
   });
 }
 
