@@ -1,11 +1,3 @@
-import {
-  profileTitle,
-  profileSubtitle,
-  profileAvatar,
-  inputTextAddCardName,
-  inputTextAddCardLink,
-} from "./variables";
-
 const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-18',
   headers: {
@@ -14,68 +6,60 @@ const config = {
   }
 }
 
+const checkStatusOfResponse = (res) => {
+  if (res.ok) {
+    return res.json()
+  } else {
+    return Promise.reject(`Ошибка: ${res.status}`)
+  }
+}
+
 const getInformationFromServer = (urlApi) => {
   return fetch(urlApi, {
     headers: config.headers
-  }).then((res) => {
-    if (res.ok) {
-      return res.json()
-    } else {
-      return Promise.reject(`Ошибка: ${res.status}`)
-    }
+  }).then((result) => {
+    return checkStatusOfResponse(result)
   })
 }
 
-const updateAvatar = () => {
+const updateAvatar = (userAvatar) => {
   return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: 'PATCH',
     headers: config.headers,
     body: JSON.stringify({
-      avatar: profileAvatar.src
+      avatar: userAvatar
     })
   })
     .then((res) => {
-      if (res.ok) {
-        return res.json()
-      } else {
-        return Promise.reject(`Ошибка: ${res.status}`)
-      }
+      return checkStatusOfResponse(res)
     })
 }
 
-const updateUserInformation = () => {
+const updateUserInformation = (userName, userJob) => {
   return fetch(`${config.baseUrl}/users/me`, {
     method: "PATCH",
     headers: config.headers,
     body: JSON.stringify({
-      name: profileTitle.textContent,
-      about: profileSubtitle.textContent
+      name: userName,
+      about: userJob
     })
   })
     .then((res) => {
-      if (res.ok) {
-        return res.json()
-      } else {
-        return Promise.reject(`Ошибка: ${res.status}`)
-      }
+      return checkStatusOfResponse(res)
     })
 }
 
-const postCardToServer = () => {
+const postCardToServer = (cardName, cardLink) => {
   return fetch(`${config.baseUrl}/cards`, {
     method: "POST",
     headers: config.headers,
     body: JSON.stringify({
-      name: inputTextAddCardName.value,
-      link: inputTextAddCardLink.value
+      name: cardName,
+      link: cardLink
     })
   })
     .then((res) => {
-      if (res.ok) {
-        return res.json()
-      } else {
-        return Promise.reject(`Ошибка: ${res.status}`)
-      }
+      return checkStatusOfResponse(res)
     })
 }
 
@@ -85,11 +69,7 @@ const deleteCardFromServer = (cardId) => {
     headers: config.headers
   })
     .then((res) => {
-      if (res.ok) {
-        return res.json()
-      } else {
-        return Promise.reject(`Ошибка: ${res.status}`)
-      }
+      return checkStatusOfResponse(res)
     })
 }
 
@@ -99,11 +79,7 @@ const addLikeToServer = (cardId) => {
     headers: config.headers,
   })
     .then((res) => {
-      if (res.ok) {
-        return res.json()
-      } else {
-        return Promise.reject(`Ошибка: ${res.status}`)
-      }
+      return checkStatusOfResponse(res)
     })
 }
 
@@ -113,11 +89,7 @@ const removeLikeFromServer = (cardId) => {
     headers: config.headers,
   })
     .then((res) => {
-      if (res.ok) {
-        return res.json()
-      } else {
-        return Promise.reject(`Ошибка: ${res.status}`)
-      }
+      return checkStatusOfResponse(res)
     })
 }
 

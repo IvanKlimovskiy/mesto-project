@@ -32,7 +32,7 @@ import {
   closeButtons,
   buttonOpenEditForm,
   buttonOpenAddCard,
-  buttonOpenAvatarEditForm,
+  buttonOpenAvatarEditForm, inputTextAddCardName, inputTextAddCardLink,
 } from "./variables"
 
 import {
@@ -55,17 +55,16 @@ export const settings = {
 function submitEditProfileForm(evt) {
   evt.preventDefault();
   toggleButtonSendingData(false)
-  profileTitle.textContent = inputTextEditFormName.value;
-  profileSubtitle.textContent = inputTextEditFormJob.value;
-  updateUserInformation()
+  updateUserInformation(inputTextEditFormName.value, inputTextEditFormJob.value)
     .then((userData) => {
       profileTitle.textContent = userData.name;
       profileSubtitle.textContent = userData.about;
       closePopup(popupEditForm);
-      toggleButtonSendingData(true)
     })
     .catch((error) => {
       console.log(error)
+    })
+    .finally(() => {
       toggleButtonSendingData(true)
     })
 }
@@ -73,16 +72,17 @@ function submitEditProfileForm(evt) {
 function submitAddCardForm(evt) {
   evt.preventDefault();
   toggleButtonSendingData(false)
-  postCardToServer()
+  postCardToServer(inputTextAddCardName.value, inputTextAddCardLink.value)
     .then((userData) => {
-      addCard(createCard(userData.name, userData.link, userData.owner._id, userData._id, userData.likes));
+      addCard(createCard(userData.name, userData.link, userData.owner._id, userData.owner._id, userData._id, userData.likes));
       closePopup(popupAddCardForm);
       evt.target.reset();
-      toggleButtonSendingData(true)
       toggleButtonState(true, popupAddCardForm, settings)
     })
     .catch((error) => {
       console.log(error)
+    })
+    .finally(() => {
       toggleButtonSendingData(true)
     })
 }
@@ -90,33 +90,28 @@ function submitAddCardForm(evt) {
 function submitEditAvatarForm(evt) {
   evt.preventDefault();
   toggleButtonSendingData(false)
-  profileAvatar.src = inputTextEditAvatarLink.value
-  updateAvatar()
+  updateAvatar(inputTextEditAvatarLink.value)
     .then((userData) => {
       profileAvatar.src = userData.avatar;
       closePopup(popupEditAvatar);
       toggleButtonState(true, editAvatarForm, settings)
       evt.target.reset();
-      toggleButtonSendingData(true)
     })
     .catch((error) => {
       console.log(error)
+    })
+    .finally(() => {
       toggleButtonSendingData(true)
     })
 }
 
-getUserInformation()
-  .then((userData) => {
+Promise.all([getUserInformation(), getInitialCards()])
+  .then(([userData, cards]) => {
     profileTitle.textContent = userData.name;
     profileSubtitle.textContent = userData.about;
     profileAvatar.src = userData.avatar;
-  }).catch((error) => {
-  console.log(error)
-})
-
-getInitialCards()
-  .then((cards) => {
-    renderInitialCards(cards)
+    const userId = userData._id
+    renderInitialCards(cards.reverse(), userId)
   })
   .catch((error) => {
     console.log(error)

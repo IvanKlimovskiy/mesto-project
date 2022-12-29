@@ -5,12 +5,11 @@ import {
   elementsBlock,
   elementTemplate,
   imageTitle,
-  myId,
   popupOpenedImage,
   profileTitle
 } from "./variables";
 
-function createCard(name, link, cardOwner, cardId, likesArray) {
+function createCard(name, link, cardOwner, userId, cardId, likesArray) {
   const articleElement = elementTemplate.querySelector(".element").cloneNode(true);
   const buttonLike = articleElement.querySelector(".element__like");
   const buttonTrash = articleElement.querySelector(".element__trash");
@@ -45,7 +44,7 @@ function createCard(name, link, cardOwner, cardId, likesArray) {
     }
   });
   elementLikeNumber.textContent = likesArray.length
-  if (cardOwner === myId) {
+  if (cardOwner === userId) {
     buttonTrash.addEventListener("click", function (evt) {
       evt.preventDefault();
       deleteCardFromServer(cardId)
@@ -72,9 +71,9 @@ function addCard(card) {
   elementsBlock.prepend(card);
 }
 
-function renderInitialCards(cards) {
+function renderInitialCards(cards, userId) {
   cards.forEach(function (card) {
-    addCard(createCard(card.name, card.link, card.owner._id, card._id, card.likes));
+    addCard(createCard(card.name, card.link, card.owner._id, userId, card._id, card.likes));
   });
 }
 
