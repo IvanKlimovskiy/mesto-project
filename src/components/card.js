@@ -1,6 +1,6 @@
 import {popupImage} from "./variables";
 import {openPopup} from "./utils";
-import {addLikeToServer, deleteCardFromServer, removeLikeFromServer} from "./api";
+import {addLikeToCard, deleteCardFromServer, removeLikeFromServer} from "./api";
 import {
   elementsBlock,
   elementTemplate,
@@ -25,7 +25,7 @@ function createCard(name, link, cardOwner, userId, cardId, likesArray) {
   buttonLike.addEventListener("click", function (evt) {
     if (!evt.target.classList.contains("element__like_active")) {
       evt.target.classList.add("element__like_active");
-      addLikeToServer(cardId)
+      addLikeToCard(cardId)
         .then((userData) => {
           elementLikeNumber.textContent = userData.likes.length
         })
@@ -78,3 +78,5 @@ function renderInitialCards(cards, userId) {
 }
 
 export {renderInitialCards, addCard, createCard};
+
+

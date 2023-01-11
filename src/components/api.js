@@ -73,7 +73,7 @@ const deleteCardFromServer = (cardId) => {
     })
 }
 
-const addLikeToServer = (cardId) => {
+const addLikeToCard = (cardId) => {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: "PUT",
     headers: config.headers,
@@ -108,6 +108,6 @@ export {
   updateAvatar,
   postCardToServer,
   deleteCardFromServer,
-  addLikeToServer,
+  addLikeToCard,
   removeLikeFromServer
 }
