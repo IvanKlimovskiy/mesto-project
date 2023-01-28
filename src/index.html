@@ -80,7 +80,7 @@
         <h2 class="edit-form__title add-card-form__title">Новое место</h2>
         <fieldset class="edit-form__profile-info add-card-form__profile-info">
           <label class="edit-form__label add-card-form__label" for="card-name"></label>
-          <input name="card-name" value="" class="edit-form__input-text add-card-form__input-text-card-name"
+          <input name="name" value="" class="edit-form__input-text add-card-form__input-text-card-name"
                  type="text" id="card-name" placeholder="Название" required minlength="2" maxlength="30"
                  pattern="^[A-Za-zА-Яа-яЁё\s\-]+$"
                  data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы">
@@ -103,7 +103,7 @@
         <h2 class="edit-form__title edit-avatar-form__title">Обновить аватар</h2>
         <fieldset class="edit-form__profile-info edit-avatar-form__profile-info">
           <label class="edit-form__label edit-avatar-form__label" for="link-avatar"></label>
-          <input name="link-avatar" value="" class="edit-form__input-text edit-avatar-form__input-text-link"
+          <input name="link" value="" class="edit-form__input-text edit-avatar-form__input-text-link"
                  id="link-avatar" placeholder="Ссылка на картинку" required type="url">
           <span class="link-avatar-error edit-form__input-error"></span>
         </fieldset>
@@ -122,7 +122,7 @@
   </div>
   <div class="popup popup_confirm-delete-card">
     <div class="edit-form-container">
-      <form action="post" class="edit-form confirm-delete-card-form">
+      <form method="post" class="edit-form confirm-delete-card-form">
         <button type="button" aria-label="Закрыть" class="popup__close-button"></button>
         <h2 class="edit-form__title edit-form__title_space_bottom confirm-delete-card-form__title">Вы уверены?</h2>
         <button class="edit-form__button confirm-delete-card__button" type="submit">
