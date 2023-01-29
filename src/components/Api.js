@@ -1,4 +1,4 @@
-export class Api {
+export default class Api {
   #baseUrl;
   #headers;
 
@@ -53,7 +53,7 @@ export class Api {
       })
   }
 
-  postCardToServer = (cardName, cardLink) => {
+  postCardToServer(cardName, cardLink) {
     return fetch(`${this.#baseUrl}/cards`, {
       method: "POST", headers: this.#headers, body: JSON.stringify({
         name: cardName, link: cardLink
@@ -64,7 +64,7 @@ export class Api {
       })
   }
 
-  deleteCardFromServer = (cardId) => {
+  deleteCardFromServer(cardId) {
     return fetch(`${this.#baseUrl}/cards/${cardId}`, {
       method: "DELETE", headers: this.#headers
     })
@@ -73,8 +73,8 @@ export class Api {
       })
   }
 
-  addLikeToCard = (cardId) => {
-    return fetch(`${this}/cards/likes/${cardId}`, {
+  addLikeToCard(cardId) {
+    return fetch(`${this.#baseUrl}/cards/likes/${cardId}`, {
       method: "PUT", headers: this.#headers,
     })
       .then((result) => {
@@ -82,7 +82,7 @@ export class Api {
       })
   }
 
-  removeLikeFromCard = (cardId) => {
+  removeLikeFromCard(cardId) {
     return fetch(`${this.#baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE", headers: this.#headers,
     })

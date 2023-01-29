@@ -1,6 +1,6 @@
-import {Popup} from "./Popup";
+import Popup from "./Popup";
 
-export class PopupWithForm extends Popup {
+export default class PopupWithForm extends Popup {
   #handleFormSubmit;
   #form;
   #inputList;
