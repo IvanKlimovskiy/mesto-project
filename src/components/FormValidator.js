@@ -4,26 +4,20 @@ export default class FormValidator {
   #submitButtonSelector;
   #inactiveButtonClass;
   #inputErrorClass;
-  #errorClass;
   #buttonElement;
   #formError;
   #inputElementsList;
+  #inputElements
 
-  constructor({
-                inputElement,
-                submitButtonSelector,
-                inactiveButtonClass,
-                inputErrorClass,
-                errorClass
-              }, validateForm) {
+  constructor(config, validateForm) {
 
-    this.#inputElement = inputElement;
-    this.#submitButtonSelector = submitButtonSelector;
-    this.#inactiveButtonClass = inactiveButtonClass;
-    this.#inputErrorClass = inputErrorClass;
-    this.#errorClass = errorClass;
+    this.#inputElement = config.inputElement;
+    this.#submitButtonSelector = config.submitButtonSelector;
+    this.#inactiveButtonClass = config.inactiveButtonClass;
+    this.#inputErrorClass = config.inputErrorClass;
     this.#validateForm = document.querySelector(validateForm);
     this.#inputElementsList = Array.from(this.#validateForm.querySelectorAll(this.#inputElement));
+    this.#buttonElement = this.#validateForm.querySelector(this.#submitButtonSelector);
   }
 
   enableValidation() {
@@ -32,10 +26,19 @@ export default class FormValidator {
     });
   }
 
+  checkInputs() {
+    this.#inputElements = Array.from(this.#validateForm.querySelectorAll(this.#inputElement));
+    this.#inputElements.forEach((inputElement) => {
+      if (inputElement.value === "") {
+        this.#toggleButtonState(this.#hasInvalidInputs(this.#inputElements))
+      }
+    })
+  }
+
   #setEventListener(inputElement) {
     inputElement.addEventListener("input", () => {
       this.#isValid(inputElement, inputElement.dataset.errorMessage);
-      this.#toggleButtonState(this.#hasInvalidInputs(this.#inputElementsList), this.#validateForm);
+      this.#toggleButtonState(this.#hasInvalidInputs(this.#inputElementsList));
     });
   };
 
@@ -60,18 +63,17 @@ export default class FormValidator {
 
   #showInputError(inputElement, errorMessage) {
     inputElement.classList.add(this.#inputErrorClass);
-    this.#formError = this.#validateForm.querySelector(this.#errorClass);
+    this.#formError = this.#validateForm.querySelector(`.${inputElement.id}-error`);
     this.#formError.textContent = errorMessage;
   };
 
   #hideInputError(inputElement) {
     inputElement.classList.remove(this.#inputErrorClass);
-    this.#formError = this.#validateForm.querySelector(this.#errorClass);
+    this.#formError = this.#validateForm.querySelector(`.${inputElement.id}-error`);
     this.#formError.textContent = "";
   };
 
-  #toggleButtonState(hasInvalidInputs, formElement) {
-    this.#buttonElement = formElement.querySelector(this.#submitButtonSelector);
+  #toggleButtonState(hasInvalidInputs) {
     if (hasInvalidInputs) {
       this.#buttonElement.classList.add(this.#inactiveButtonClass);
       this.#buttonElement.disabled = true;
@@ -82,13 +84,12 @@ export default class FormValidator {
   }
 
   toggleButtonSendingData(isSent) {
-    this.#buttonElement = this.#validateForm.querySelector(this.#submitButtonSelector);
     if (isSent) {
       this.#buttonElement.textContent = "Сохранить"
-      this.#buttonElement.disabled = false
+      this.#toggleButtonState(false)
     } else {
       this.#buttonElement.textContent = "Сохранение..."
-      this.#buttonElement.disabled = true
+      this.#toggleButtonState(true)
     }
   }
 }
