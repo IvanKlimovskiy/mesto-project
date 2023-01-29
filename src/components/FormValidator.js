@@ -16,6 +16,7 @@ export default class FormValidator {
                 inputErrorClass,
                 errorClass
               }, validateForm) {
+
     this.#inputElement = inputElement;
     this.#submitButtonSelector = submitButtonSelector;
     this.#inactiveButtonClass = inactiveButtonClass;
