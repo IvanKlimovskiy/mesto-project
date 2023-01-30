@@ -31,6 +31,9 @@ export default class FormValidator {
     this.#inputElements.forEach((inputElement) => {
       if (inputElement.value === "") {
         this.#toggleButtonState(this.#hasInvalidInputs(this.#inputElements))
+      } else {
+        this.#hideInputError(inputElement)
+        this.#toggleButtonState(this.#hasInvalidInputs(this.#inputElements))
       }
     })
   }

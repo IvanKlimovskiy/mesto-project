@@ -9,8 +9,6 @@ import UserInfo from "../components/UserInfo";
 
 import {
   buttonOpenEditForm,
-  inputTextEditFormName,
-  inputTextEditFormJob,
   buttonOpenAddCard,
   buttonOpenAvatarEditForm,
 } from "../utils/variables";
@@ -30,7 +28,7 @@ const validationConfig = {
   inputErrorClass: "edit-form__input-text_type_error",
 }
 
-export const editForm = new FormValidator(validationConfig, ".edit-form")
+const editForm = new FormValidator(validationConfig, ".edit-form")
 const addCardForm = new FormValidator(validationConfig, ".add-card-form")
 const editAvatar = new FormValidator(validationConfig, ".edit-avatar-form")
 editForm.enableValidation();
@@ -55,7 +53,7 @@ const userInformation = new UserInfo(
 const popupOpenedImage = new PopupWithImage(".popup_image");
 popupOpenedImage.setEventListeners();
 
-export const popupEditForm = new PopupWithForm(
+const popupEditForm = new PopupWithForm(
   ".popup_edit-form",
   (inputValues) => {
     editForm.toggleButtonSendingData(false);
@@ -166,11 +164,9 @@ Promise.all([userInformation.getUserInfo(), api.getInitialCards()])
 
 buttonOpenEditForm.addEventListener("click", () => {
   userInformation.getUserInfo()
-    .then((userData) => {
-      inputTextEditFormName.value = userData.name;
-      inputTextEditFormJob.value = userData.about;
+    .then(() => {
+      editForm.checkInputs();
     })
-  editForm.checkInputs();
   popupEditForm.open();
 });
 
