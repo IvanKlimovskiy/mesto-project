@@ -711,6 +711,7 @@ template {
   background-image: url(08af6fbb37d19d4aa333.svg);
 }
 .element__trash {
+  display: none;
   position: absolute;
   top: 20px;
   right: 20px;
@@ -727,6 +728,7 @@ template {
 .element__trash:hover {
   opacity: .6;
 }
+
 .element__title {
   max-width: 190px;
   text-overflow: ellipsis;
