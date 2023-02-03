@@ -1,7 +1,7 @@
 import "./index.css";
 import PopupWithForm from "../components/PopupWithForm";
 import Card from "../components/Card";
-import Api from "../components/Api";
+import {api} from "../components/Api";
 import PopupWithImage from "../components/PopupWithImage";
 import Section from "../components/Section";
 import FormValidator from "../components/FormValidator";
@@ -11,63 +11,37 @@ import {
   buttonOpenEditForm,
   buttonOpenAddCard,
   buttonOpenAvatarEditForm,
+  userProfileSelectors,
+  validationConfig
 } from "../utils/variables";
-
-const api = new Api({
-  baseUrl: "https://nomoreparties.co/v1/plus-cohort-18",
-  headers: {
-    authorization: "73a65b3f-f1cb-4973-9fdd-42c64f95341a",
-    "Content-Type": "application/json",
-  },
-});
-
-const validationConfig = {
-  inputElement: ".edit-form__input-text",
-  submitButtonSelector: ".edit-form__button",
-  inactiveButtonClass: "edit-form__button_disabled",
-  inputErrorClass: "edit-form__input-text_type_error",
-}
-
-const editForm = new FormValidator(validationConfig, ".edit-form")
-const addCardForm = new FormValidator(validationConfig, ".add-card-form")
-const editAvatar = new FormValidator(validationConfig, ".edit-avatar-form")
-editForm.enableValidation();
-addCardForm.enableValidation();
-editAvatar.enableValidation();
-
-const userInformation = new UserInfo(
-  ".profile__title",
-  ".profile__subtitle",
-  ".profile__avatar",
-  () => {
-    return api.getUserInformation()
-  },
-  (inputFormName, inputFormJob) => {
-    return api.updateUserInformation(inputFormName, inputFormJob)
-  },
-  (userAvatar) => {
-    return api.updateAvatar(userAvatar)
-  }
-)
 
 const popupOpenedImage = new PopupWithImage(".popup_image");
 popupOpenedImage.setEventListeners();
+
+const userInformation = new UserInfo(userProfileSelectors);
 
 const popupEditForm = new PopupWithForm(
   ".popup_edit-form",
   (inputValues) => {
     editForm.toggleButtonSendingData(false);
-    userInformation.setUserInfo(inputValues.name, inputValues.job)
-      .then(() => {
+    api.updateUserInformation(inputValues.name, inputValues.about)
+      .then((userData) => {
+        userInformation.setUserInfo(userData)
         popupEditForm.close()
-      }).catch((error) => {
-      console.log(error);
-    })
+      })
+      .catch((error) => {
+        console.log(error);
+      })
       .finally(() => {
         editForm.toggleButtonSendingData(true);
       });
   },
+  userInformation.getUserInfo.bind(userInformation)
 );
+
+const editForm = new FormValidator(validationConfig, ".edit-form")
+editForm.enableValidation();
+popupEditForm.setEventListeners();
 
 const popupAddCardForm = new PopupWithForm(
   ".popup_add-card-form",
@@ -107,12 +81,17 @@ const popupAddCardForm = new PopupWithForm(
   }
 );
 
+const addCardForm = new FormValidator(validationConfig, ".add-card-form")
+addCardForm.enableValidation();
+popupAddCardForm.setEventListeners();
+
 const popupEditAvatar = new PopupWithForm(
   ".popup_edit-avatar",
   (inputValues) => {
     editAvatar.toggleButtonSendingData(false);
-    userInformation.updateAvatar(inputValues.link)
-      .then(() => {
+    api.updateAvatar(inputValues.link)
+      .then((userData) => {
+        userInformation.setUserInfo(userData)
         popupEditAvatar.close();
       })
       .catch((error) => {
@@ -124,13 +103,14 @@ const popupEditAvatar = new PopupWithForm(
   },
 );
 
-popupAddCardForm.setEventListeners();
-popupEditForm.setEventListeners();
+const editAvatar = new FormValidator(validationConfig, ".edit-avatar-form")
+editAvatar.enableValidation();
 popupEditAvatar.setEventListeners();
 
-Promise.all([userInformation.getUserInfo(), api.getInitialCards()])
+Promise.all([api.getUserInformation(), api.getInitialCards()])
   .then(([userData, cards]) => {
     const userId = userData._id;
+    userInformation.setUserInfo(userData)
     const cardsList = new Section({
         items: cards.reverse(),
         renderer: (card) => {
@@ -163,11 +143,8 @@ Promise.all([userInformation.getUserInfo(), api.getInitialCards()])
   });
 
 buttonOpenEditForm.addEventListener("click", () => {
-  userInformation.getUserInfo()
-    .then(() => {
-      editForm.checkInputs();
-    })
   popupEditForm.open();
+  editForm.checkInputs();
 });
 
 buttonOpenAddCard.addEventListener("click", () => {

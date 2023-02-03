@@ -5,16 +5,19 @@ export default class PopupWithForm extends Popup {
   #form;
   #inputList;
   #formValues;
-  #checkerInputs;
+  #defaultFieldsValuesGetter;
+  #emptyFunction;
 
-  constructor(popupSelector, handleFormSubmit, checkerInputs) {
+  constructor(popupSelector, handleFormSubmit, defaultFieldsValuesGetter) {
     super(popupSelector);
     this.#handleFormSubmit = handleFormSubmit;
     this.#form = document.querySelector(popupSelector).querySelector(".edit-form");
-    this.#checkerInputs = checkerInputs
+    this.#emptyFunction = async function () { return {} };
+    this.#defaultFieldsValuesGetter = defaultFieldsValuesGetter || this.#emptyFunction;
   }
 
   open() {
+    this.#setInputValues(this.#defaultFieldsValuesGetter());
     super.open();
   }
 
@@ -28,6 +31,15 @@ export default class PopupWithForm extends Popup {
     this.#form.addEventListener("submit", (event) => {
       event.preventDefault();
       this.#handleFormSubmit(this.#getInputValues())
+    })
+  }
+
+  #setInputValues(formData) {
+    this.#inputList = Array.from(this.#form.querySelectorAll(".edit-form__input-text"));
+    this.#inputList.forEach((input) => {
+      if (typeof formData[input.name] !== "undefined") {
+        input.value = formData[input.name];
+      }
     })
   }
 
