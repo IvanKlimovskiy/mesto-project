@@ -7,10 +7,9 @@ export default class FormValidator {
   #buttonElement;
   #formError;
   #inputElementsList;
-  #inputElements
+  #inputElements;
 
   constructor(config, validateForm) {
-
     this.#inputElement = config.inputElement;
     this.#submitButtonSelector = config.submitButtonSelector;
     this.#inactiveButtonClass = config.inactiveButtonClass;
@@ -29,33 +28,33 @@ export default class FormValidator {
   checkInputs() {
     this.#inputElements = Array.from(this.#validateForm.querySelectorAll(this.#inputElement));
     this.#inputElements.forEach((inputElement) => {
-      if (inputElement.value === "") {
-        this.#toggleButtonState(this.#hasInvalidInputs(this.#inputElements))
+      if (inputElement.value === '') {
+        this.#toggleButtonState(this.#hasInvalidInputs(this.#inputElements));
       } else {
-        this.#hideInputError(inputElement)
-        this.#toggleButtonState(this.#hasInvalidInputs(this.#inputElements))
+        this.#hideInputError(inputElement);
+        this.#toggleButtonState(this.#hasInvalidInputs(this.#inputElements));
       }
-    })
+    });
   }
 
   #setEventListener(inputElement) {
-    inputElement.addEventListener("input", () => {
+    inputElement.addEventListener('input', () => {
       this.#isValid(inputElement, inputElement.dataset.errorMessage);
       this.#toggleButtonState(this.#hasInvalidInputs(this.#inputElementsList));
     });
-  };
+  }
 
   #hasInvalidInputs(inputList) {
     return inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
-  };
+  }
 
   #isValid(inputElement, errorMessage) {
     if (inputElement.validity.patternMismatch) {
-      inputElement.setCustomValidity(errorMessage)
+      inputElement.setCustomValidity(errorMessage);
     } else {
-      inputElement.setCustomValidity("")
+      inputElement.setCustomValidity('');
     }
     if (!inputElement.validity.valid) {
       this.#showInputError(inputElement, inputElement.validationMessage);
@@ -68,13 +67,13 @@ export default class FormValidator {
     inputElement.classList.add(this.#inputErrorClass);
     this.#formError = this.#validateForm.querySelector(`.${inputElement.id}-error`);
     this.#formError.textContent = errorMessage;
-  };
+  }
 
   #hideInputError(inputElement) {
     inputElement.classList.remove(this.#inputErrorClass);
     this.#formError = this.#validateForm.querySelector(`.${inputElement.id}-error`);
-    this.#formError.textContent = "";
-  };
+    this.#formError.textContent = '';
+  }
 
   #toggleButtonState(hasInvalidInputs) {
     if (hasInvalidInputs) {
@@ -88,11 +87,11 @@ export default class FormValidator {
 
   toggleButtonSendingData(isSent) {
     if (isSent) {
-      this.#buttonElement.textContent = "Сохранить"
-      this.#toggleButtonState(false)
+      this.#buttonElement.textContent = 'Сохранить';
+      this.#toggleButtonState(false);
     } else {
-      this.#buttonElement.textContent = "Сохранение..."
-      this.#toggleButtonState(true)
+      this.#buttonElement.textContent = 'Сохранение...';
+      this.#toggleButtonState(true);
     }
   }
 }

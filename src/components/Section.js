@@ -3,7 +3,7 @@ export default class Section {
   #renderer;
   #selectorBlock;
 
-  constructor({items, renderer}, selectorBlock) {
+  constructor({ items, renderer }, selectorBlock) {
     this.#initialArray = items;
     this.#renderer = renderer;
     this.#selectorBlock = document.querySelector(selectorBlock);
@@ -11,11 +11,11 @@ export default class Section {
 
   renderElements() {
     this.#initialArray.forEach((item) => {
-      this.#renderer(item)
-    })
+      this.#renderer(item);
+    });
   }
 
   addItem(card) {
-    this.#selectorBlock.prepend(card)
+    this.#selectorBlock.prepend(card);
   }
 }

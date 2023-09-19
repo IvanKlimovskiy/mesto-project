@@ -5,17 +5,17 @@
   width: 24px;
   height: 24px;
   background-color: rgba(0, 0, 0, 0);
-  background-image: url('../../../images/button-edit.svg');
+  background-image: url("../../../images/button-edit.svg");
   background-repeat: no-repeat;
   background-size: 10px;
   background-position: 50%;
   border: 1px solid white;
   cursor: pointer;
-  transition: .5s;
+  transition: 0.5s;
 }
 
 .profile__edit-button:hover {
-  opacity: .6;
+  opacity: 0.6;
 }
 
 @media (max-width: 425px) {

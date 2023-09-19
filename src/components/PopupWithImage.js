@@ -1,4 +1,4 @@
-import Popup from "./Popup";
+import Popup from './Popup';
 
 export default class PopupWithImage extends Popup {
   #popup;
@@ -9,9 +9,9 @@ export default class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
     this.#popup = document.querySelector(popupSelector);
-    this.#popupImage = this.#popup.querySelector(".popup__image");
-    this.#imageTitle = this.#popup.querySelector(".popup__title");
-    this.#buttonClosePopup = this.#popup.querySelector(".popup__close-button")
+    this.#popupImage = this.#popup.querySelector('.popup__image');
+    this.#imageTitle = this.#popup.querySelector('.popup__title');
+    this.#buttonClosePopup = this.#popup.querySelector('.popup__close-button');
   }
 
   open(cardName, imageLink) {
@@ -28,6 +28,4 @@ export default class PopupWithImage extends Popup {
   setEventListeners() {
     super.setEventListeners();
   }
-
 }
-

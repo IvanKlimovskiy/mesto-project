@@ -7,11 +7,9 @@
 
 .profile__avatar-wrapper:hover .profile__avatar {
   cursor: pointer;
-  opacity: .2;
+  opacity: 0.2;
 }
 
 .profile__avatar-wrapper:hover .profile__edit-avatar-image {
   display: block;
 }
-
-

@@ -14,7 +14,6 @@
   .elements {
     grid-template-columns: minmax(282px, 1fr) minmax(282px, 1fr);
   }
-
 }
 
 @media (max-width: 619px) {

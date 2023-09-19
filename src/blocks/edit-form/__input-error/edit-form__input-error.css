@@ -1,9 +1,9 @@
 .edit-form__input-error {
-    max-width: 358px;
-    height: 12px;
-    display: block;
-    color: #FF0000;
-    font-weight: 400;
-    font-size: 12px;
-    padding: 5px 0 13px;
+  max-width: 358px;
+  height: 12px;
+  display: block;
+  color: #ff0000;
+  font-weight: 400;
+  font-size: 12px;
+  padding: 5px 0 13px;
 }

@@ -5,14 +5,14 @@
   right: 20px;
   width: 18px;
   height: 19px;
-  background-image: url('../../../images/Trash.svg');
+  background-image: url("../../../images/Trash.svg");
   background-size: 100%;
   background-color: rgba(255, 255, 255, 0);
   cursor: pointer;
-  transition: .5s;
+  transition: 0.5s;
   border: none;
 }
 
 .element__trash:hover {
-  opacity: .6;
+  opacity: 0.6;
 }
