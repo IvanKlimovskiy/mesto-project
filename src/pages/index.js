@@ -14,10 +14,9 @@ import {
 } from "../utils/variables";
 
 const api = new Api({
-  baseUrl: "http://localhost:3000",
+baseUrl: "https://nomoreparties.co/v1/plus-cohort-18",
   headers: {
-    authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTFiZDk0NzQ3NjIwNTMzZmM2YzM0ODkiLCJpYXQiOjE2OTYzNTUyNjgsImV4cCI6MTY5NzY1MTI2OH0.UZ-5ZeSX5WdK0YtyR9_1vdP832o05S_HdOl6tyWlCgg",
-    "Content-Type": "application/json",
+    authorization: "73a65b3f-f1cb-4973-9fdd-42c64f95341a",
   },
 });
 
