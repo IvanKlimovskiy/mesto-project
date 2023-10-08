@@ -1,4 +1,4 @@
-import Popup from "./Popup";
+import Popup from './Popup';
 
 export default class PopupWithForm extends Popup {
   #handleFormSubmit;
@@ -10,8 +10,8 @@ export default class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit, checkerInputs) {
     super(popupSelector);
     this.#handleFormSubmit = handleFormSubmit;
-    this.#form = document.querySelector(popupSelector).querySelector(".edit-form");
-    this.#checkerInputs = checkerInputs
+    this.#form = document.querySelector(popupSelector).querySelector('.edit-form');
+    this.#checkerInputs = checkerInputs;
   }
 
   open() {
@@ -25,18 +25,18 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this.#form.addEventListener("submit", (event) => {
+    this.#form.addEventListener('submit', (event) => {
       event.preventDefault();
-      this.#handleFormSubmit(this.#getInputValues())
-    })
+      this.#handleFormSubmit(this.#getInputValues());
+    });
   }
 
   #getInputValues() {
-    this.#inputList = Array.from(this.#form.querySelectorAll(".edit-form__input-text"));
-    this.#formValues = {}
+    this.#inputList = Array.from(this.#form.querySelectorAll('.edit-form__input-text'));
+    this.#formValues = {};
     this.#inputList.forEach((input) => {
-      this.#formValues[input.name] = input.value
-    })
-    return this.#formValues
+      this.#formValues[input.name] = input.value;
+    });
+    return this.#formValues;
   }
 }

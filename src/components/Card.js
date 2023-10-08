@@ -19,7 +19,7 @@ export default class Card {
   constructor(data, userId, selectorCardTemplate, liker, disliker, deleter, popupOpener) {
     this.#cardName = data.name;
     this.#imageLink = data.link;
-    this.#cardOwner = data.owner._id;
+    this.#cardOwner = data.owner;
     this.#cardId = data._id;
     this.#likes = data.likes;
     this.#userId = userId;
@@ -45,7 +45,7 @@ export default class Card {
     this.#element.querySelector(".element__image").src = this.#imageLink;
     this.#element.querySelector(".element__like-number").textContent = this.#likes.length;
 
-    if (this.#likes.some(like => like.name === this.#profileTitle.textContent)) {
+    if (this.#likes.some(like => like === this.#userId)) {
       this.#element.querySelector(".element__like").classList.add("element__like_active");
     }
     if (this.#cardOwner === this.#userId) {
@@ -80,7 +80,7 @@ export default class Card {
       this.#buttonLike.classList.add("element__like_active");
       this.#liker(this.#cardId)
         .then((userData) => {
-          this.#element.querySelector(".element__like-number").textContent = userData.likes.length
+          this.#element.querySelector(".element__like-number").textContent = userData.data.card.likes.length
         })
         .catch((error) => {
           console.log(error)
@@ -89,7 +89,7 @@ export default class Card {
       this.#buttonLike.classList.remove("element__like_active");
       this.#disliker(this.#cardId)
         .then((userData) => {
-          this.#element.querySelector(".element__like-number").textContent = userData.likes.length
+          this.#element.querySelector(".element__like-number").textContent = userData.data.card.likes.length
         })
         .catch((error) => {
           console.log(error)

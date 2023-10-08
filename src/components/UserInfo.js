@@ -22,18 +22,18 @@ export default class UserInfo {
   updateAvatar(userAvatar) {
     return this.#avatarUpdater(userAvatar)
       .then((userData) => {
-        this.#profileAvatar.src = userData.avatar;
+        this.#profileAvatar.src = userData.data.user.avatar;
       })
   }
 
   getUserInfo() {
     return this.#getterUserData()
       .then((userData) => {
-        this.#profileName.textContent = userData.name;
-        this.#profileJob.textContent = userData.about;
-        this.#inputTextEditFormName.value = userData.name;
-        this.#inputTextEditFormJob.value = userData.about;
-        this.#profileAvatar.src = userData.avatar;
+        this.#profileName.textContent = userData.user.name;
+        this.#profileJob.textContent = userData.user.about;
+        this.#inputTextEditFormName.value = userData.user.name;
+        this.#inputTextEditFormJob.value = userData.user.about;
+        this.#profileAvatar.src = userData.user.avatar;
         return userData
       })
   }
@@ -41,8 +41,8 @@ export default class UserInfo {
   setUserInfo(inputFormName, inputFormJob) {
     return this.#setterUserData(inputFormName, inputFormJob)
       .then((userData) => {
-        this.#profileName.textContent = userData.name;
-        this.#profileJob.textContent = userData.about;
+        this.#profileName.textContent = userData.data.user.name;
+        this.#profileJob.textContent = userData.data.user.about;
       })
   }
 }

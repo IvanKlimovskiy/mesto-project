@@ -1,94 +1,99 @@
 export default class Api {
   #baseUrl;
   #headers;
-
-  constructor({baseUrl, headers}) {
+  #defaultHeaders;
+  constructor({ baseUrl, headers }) {
     this.#baseUrl = baseUrl;
     this.#headers = headers;
+    this.#defaultHeaders = 'Content-Type": "application/json';
   }
 
   #checkStatusOfResponse(res) {
     if (res.ok) {
-      return res.json()
+      return res.json();
     } else {
-      return Promise.reject(`Ошибка: ${res.status}`)
+      return Promise.reject(`Ошибка: ${res.status}`);
     }
   }
 
   getInitialCards() {
     return fetch(`${this.#baseUrl}/cards`, {
-      headers: this.#headers
+      headers: this.#headers,
     }).then((result) => {
-      return this.#checkStatusOfResponse(result)
-    })
+      return this.#checkStatusOfResponse(result);
+    });
   }
 
   getUserInformation() {
     return fetch(`${this.#baseUrl}/users/me`, {
-      headers: this.#headers
+      headers: this.#headers,
     }).then((result) => {
-      return this.#checkStatusOfResponse(result)
-    })
+      return this.#checkStatusOfResponse(result);
+    });
   }
 
   updateAvatar(userAvatar) {
     return fetch(`${this.#baseUrl}/users/me/avatar`, {
-      method: 'PATCH', headers: this.#headers, body: JSON.stringify({
-        avatar: userAvatar
-      })
-    })
-      .then((result) => {
-        return this.#checkStatusOfResponse(result)
-      })
+      method: 'PATCH',
+      headers: this.#headers,
+      body: JSON.stringify({
+        avatar: userAvatar,
+      }),
+    }).then((result) => {
+      return this.#checkStatusOfResponse(result);
+    });
   }
 
   updateUserInformation(userName, userJob) {
     return fetch(`${this.#baseUrl}/users/me`, {
-      method: "PATCH", headers: this.#headers, body: JSON.stringify({
-        name: userName, about: userJob
-      })
-    })
-      .then((result) => {
-        return this.#checkStatusOfResponse(result)
-      })
+      method: 'PATCH',
+      headers: this.#headers,
+      body: JSON.stringify({
+        name: userName,
+        about: userJob,
+      }),
+    }).then((result) => {
+      return this.#checkStatusOfResponse(result);
+    });
   }
 
   postCardToServer(cardName, cardLink) {
     return fetch(`${this.#baseUrl}/cards`, {
-      method: "POST", headers: this.#headers, body: JSON.stringify({
-        name: cardName, link: cardLink
-      })
-    })
-      .then((result) => {
-        return this.#checkStatusOfResponse(result)
-      })
+      method: 'POST',
+      headers: this.#headers,
+      body: JSON.stringify({
+        name: cardName,
+        link: cardLink,
+      }),
+    }).then((result) => {
+      return this.#checkStatusOfResponse(result);
+    });
   }
 
   deleteCardFromServer(cardId) {
     return fetch(`${this.#baseUrl}/cards/${cardId}`, {
-      method: "DELETE", headers: this.#headers
-    })
-      .then((result) => {
-        return this.#checkStatusOfResponse(result)
-      })
+      method: 'DELETE',
+      headers: this.#headers,
+    }).then((result) => {
+      return this.#checkStatusOfResponse(result);
+    });
   }
 
   addLikeToCard(cardId) {
     return fetch(`${this.#baseUrl}/cards/likes/${cardId}`, {
-      method: "PUT", headers: this.#headers,
-    })
-      .then((result) => {
-        return this.#checkStatusOfResponse(result)
-      })
+      method: 'PUT',
+      headers: this.#headers,
+    }).then((result) => {
+      return this.#checkStatusOfResponse(result);
+    });
   }
 
   removeLikeFromCard(cardId) {
     return fetch(`${this.#baseUrl}/cards/likes/${cardId}`, {
-      method: "DELETE", headers: this.#headers,
-    })
-      .then((result) => {
-        return this.#checkStatusOfResponse(result)
-      })
+      method: 'DELETE',
+      headers: this.#headers,
+    }).then((result) => {
+      return this.#checkStatusOfResponse(result);
+    });
   }
-
 }
